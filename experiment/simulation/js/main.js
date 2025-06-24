@@ -44,17 +44,31 @@ NOP`,
     {
         title: 'Example 3: Multiple Iterations',
         code: `MOV R0, 0
-MOV R1, 5
-MOV R2, 3
-MOV R3, 1
+MOV R1, 0
+MOV R2, 0
+MOV R3, 0
+MOV R4, 1
+MOV R5, 3
+MOV R6,10
 LOOP:
-ADD R0, R0, R3
-BEQ R0, R1, END
-ADD R2, R2, R3
-BNE R1, R0, LOOP
+AND R7, R0, R4
+BNE R7, R3, SKIP_EVEN
+ADD R1, R1, R4
+SKIP_EVEN:
+MOV R8, 5
+BNE R0, R8, SKIP_FIVE
+SUB R2, R2, R4
+SKIP_FIVE:
+ADD R3, R3, R4
+BNE R3, R5, SKIP_MULT
+MOV R3, 0
+ADD R2, R2, R4
+SKIP_MULT:
+ADD R0, R0, R4
+BNE R0, R6, LOOP
 END:
 NOP`,
-        trace: 'B0:N, B1:T, B0:N, B1:T, B0:N, B1:T, B0:N, B1:T, B0:T'
+        trace: 'B0:N,B1:T,B2:T,B3:T,B0:N,B1:T,B2:T,B3:T,B0:T,B1:T,B2:N,B3:T,B0:T,B1:T,B2:T,B3:T,B0:T,B1:T,B2:T,B3:T,B0:T,B1:N,B2:N,B3:T,B0:N,B1:T,B2:T,B3:T,B0:N,B1:T,B2:T,B3:T,B0:T,B1:T,B2:N,B3:T,B0:T,B1:T,B2:T,B3:N'
     }
 ];
 
