@@ -95,6 +95,9 @@ body {
 .example-trace {
     margin: 0.75rem 0;
     font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .trace-label {
@@ -104,6 +107,11 @@ body {
 
 .trace-value {
     color: #3273dc;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
 }
 
 /* Input/Output grid */
@@ -137,6 +145,9 @@ body {
     line-height: 1.4;
     white-space: pre-line;
     margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .trace-title {
