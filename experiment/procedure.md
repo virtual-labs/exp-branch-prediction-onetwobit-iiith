@@ -1,4 +1,3 @@
-### Procedure
 1.  Select the type of predictor you want to use (One-Bit or Two-Bit).
 2.  Enter the sequence of branch outcomes (T for taken, N for not taken).
 3.  Click on the 'Simulate' button to see the predictor's performance.
