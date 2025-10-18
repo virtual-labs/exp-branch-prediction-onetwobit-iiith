@@ -52,18 +52,18 @@
       "difficulty": "beginner"
     },
     {
-      "question": "What is a disadvantage of a one-bit predictor?",
+      "question": "What is a primary disadvantage of a one-bit branch predictor?",
       "answers": {
-        "a": "It is too complex",
-        "b": "It is slow",
-        "c": "It can be inaccurate with loops",
-        "d": "It requires a lot of memory"
+        "a": "Its hardware implementation is more complex than a two-bit predictor.",
+        "b": "It performs poorly on branches that are strongly biased (i.e., almost always taken).",
+        "c": "It mispredicts twice on each execution of a simple loop.",
+        "d": "It introduces significant latency into the processor's instruction pipeline."
       },
       "explanations": {
-        "a": "Incorrect. It's the simplest predictor.",
-        "b": "Incorrect. It's very fast.",
-        "c": "Correct. It mispredicts twice for every loop execution (first and last time).",
-        "d": "Incorrect. It requires very little memory."
+        "a": "Incorrect. A one-bit predictor is the simplest form of dynamic branch predictor and is less complex than a two-bit predictor.",
+        "b": "Incorrect. This is a strength, not a weakness. For a strongly biased branch, it will predict correctly after the very first instance.",
+        "c": "Correct. Because it flips its prediction after a single incorrect outcome, it mispredicts the first time a loop is entered (a taken branch) and the first time it is exited (a not-taken branch), resulting in two mispredictions for every complete loop execution.",
+        "d": "Incorrect. Due to its simplicity, a one-bit predictor is extremely fast and has very low latency."
       },
       "correctAnswer": "c",
       "difficulty": "intermediate"
@@ -120,18 +120,18 @@
       "difficulty": "advanced"
     },
     {
-      "question": "What is the main advantage of a two-bit predictor over a one-bit predictor?",
+      "question": "What is the main advantage of using a two-bit saturating counter for branch prediction over a one-bit scheme?",
       "answers": {
-        "a": "It is simpler",
-        "b": "It is faster",
-        "c": "It is more accurate",
-        "d": "It uses less memory"
+        "a": "It reduces interference (aliasing) between different branches mapping to the same counter.",
+        "b": "It can predict a branch's target address in addition to its direction.",
+        "c": "It provides hysteresis, preventing a single different outcome from flipping the prediction.",
+        "d": "It converges on the correct prediction for a strongly biased branch more quickly."
       },
       "explanations": {
-        "a": "Incorrect. It's more complex.",
-        "b": "Incorrect. The speed is comparable.",
-        "c": "Correct. The two-bit scheme provides hysteresis, making it more accurate, especially with loops.",
-        "d": "Incorrect. It uses more memory (two bits per branch instead of one)."
+        "a": "Incorrect. Aliasing is related to the size of the predictor table and the hashing function used, not the number of bits in the counter itself.",
+        "b": "Incorrect. Directional predictors like one-bit and two-bit counters only predict if a branch is taken or not-taken. The Branch Target Buffer (BTB) is responsible for predicting the target address.",
+        "c": "Correct. A two-bit counter must be wrong twice in a row to swing from a 'strongly taken' to a 'weakly not-taken' state. This hysteresis makes it resilient to the single not-taken branch at the end of a typical loop, improving accuracy.",
+        "d": "Incorrect. A one-bit predictor will be correct after just one execution of a biased branch, while a two-bit counter needs at least two executions to move to a 'strongly' biased state. Therefore, it converges more slowly."
       },
       "correctAnswer": "c",
       "difficulty": "advanced"
