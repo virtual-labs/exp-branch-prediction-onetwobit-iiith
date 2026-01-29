@@ -1,0 +1,356 @@
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #fafafa;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Main title */
+.main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #3273dc;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Box styling */
+.box {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    border: 1px solid #e1e5e9;
+}
+
+/* Section titles */
+.section-title {
+    margin-bottom: 1rem;
+    color: #363636;
+    font-size: 1.25rem;
+}
+
+/* Instructions list */
+.instructions-list {
+    margin-left: 1rem;
+    line-height: 1.6;
+}
+
+.instruction-code {
+    background: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+/* Examples grid */
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.example-card {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border: 1px solid #e1e5e9;
+}
+
+.example-title {
+    margin: 0 0 0.75rem 0;
+    color: #209cee;
+    font-size: 1rem;
+}
+
+.example-code {
+    background: #f5f5f5;
+    color: #363636;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: pre;
+    margin: 0;
+}
+
+.example-trace {
+    margin: 0.75rem 0;
+    font-size: 14px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.trace-label {
+    color: #363636;
+    font-weight: 500;
+}
+
+.trace-value {
+    color: #3273dc;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
+}
+
+/* Input/Output grid */
+.input-output-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Program textarea */
+.program-textarea {
+    width: 100%;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    line-height: 1.4;
+    resize: vertical;
+}
+
+/* Colored display areas */
+.colored-display {
+    background: #f5f5f5;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: pre-line;
+    margin-bottom: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.trace-title {
+    margin: 0 0 0.5rem 0;
+    color: #209cee;
+    font-size: 1rem;
+}
+
+/* Button styles */
+.btn {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn.primary {
+    background: #3273dc;
+    color: #ffffff;
+}
+
+.btn.primary:hover {
+    background: #2366d1;
+}
+
+.btn.secondary {
+    background: #209cee;
+    color: #ffffff;
+}
+
+.btn.secondary:hover {
+    background: #1496ed;
+}
+
+.btn.small {
+    font-size: 12px;
+    padding: 0.4rem 0.8rem;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Predictor controls */
+.predictor-controls {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.75rem;
+}
+
+.predictor-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.predictor-checkbox {
+    margin-right: 0.5rem;
+}
+
+.predictor-text {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #363636;
+}
+
+/* Sequence input */
+.sequence-input-group {
+    margin-bottom: 1rem;
+}
+
+.sequence-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #363636;
+}
+
+.sequence-input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    font-size: 14px;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+/* Results table */
+.table-container {
+    overflow-x: auto;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table-header {
+    background: #f5f5f5;
+}
+
+.table-header th {
+    border-bottom: 2px solid #dbdbdb;
+    padding: 0.75rem 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: #363636;
+}
+
+.results-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.branch-badge {
+    color: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.monospace {
+    font-family: monospace;
+    font-weight: 600;
+}
+
+.correct-yes {
+    color: #23d160;
+    font-weight: 600;
+}
+
+.correct-no {
+    color: #ff3860;
+    font-weight: 600;
+}
+
+.state-cell {
+    font-family: monospace;
+}
+
+/* Summary */
+.summary {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f0f8ff;
+    border: 1px solid #3273dc;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3273dc;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .input-output-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .examples-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .box {
+        padding: 1rem;
+    }
+    
+    .predictor-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .button-group {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    
+    .main-title {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        font-size: 12px;
+        padding: 0.4rem 0.8rem;
+    }
+}
