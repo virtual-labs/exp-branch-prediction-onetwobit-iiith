@@ -1,13 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Add CSS at the head of HTML file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Predictor Simulator</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-		<!-- Your code goes here-->
+    <div class="container">
+        <h1 class="main-title">Branch Predictor Simulator</h1>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+        <!-- Copy Example -->
+        <div class="box">
+            <h3 class="section-title">Procedure</h3>
+            <ol class="instructions-list">
+                <li>Enter the assembly code in the code box provided or copy the example code.</li>
+                <li>Click 'Generate Trace' to generate the execution trace for the program.</li>
+                <li>Select the type of predictor you want to use (One-Bit or Two-Bit).</li>
+                <li>Click on the 'Run Simulation' button to see the predictor's performance.</li>
+                <li>You can reset the simulation at any time by clicking the 'Reset' button.</li>
+            </ol>
+        </div>
+
+        <!-- Allowed Instructions -->
+        <div class="box">
+            <h3 class="section-title">Allowed Instructions</h3>
+            <ul class="instructions-list">
+                <li><code class="instruction-code">ADD Rdest, Rsrc1, Rsrc2</code> — add two registers</li>
+                <li><code class="instruction-code">SUB Rdest, Rsrc1, Rsrc2</code> — subtract two registers</li>
+                <li><code class="instruction-code">AND Rdest, Rsrc1, Rsrc2</code> — bitwise AND two registers</li>
+                <li><code class="instruction-code">MOV Rdest, constant</code> — load immediate into a register</li>
+                <li><code class="instruction-code">BEQ R1, R2, label</code> — branch if equal</li>
+                <li><code class="instruction-code">BNE R1, R2, label</code> — branch if not equal</li>
+            </ul>
+        </div>
+
+        <!-- Examples -->
+        <div class="examples-grid" id="examples-container">
+            <!-- Examples will be populated by JavaScript -->
+        </div>
+
+        <!-- Assembly Input & Side-by-Side Output -->
+        <div class="box">
+            <h3 class="section-title">Enter Assembly Program</h3>
+            <div class="input-output-grid">
+                <!-- Left: Input -->
+                <div>
+                    <textarea 
+                        id="program-input" 
+                        rows="10" 
+                        placeholder="LOOP:&#10;ADD R1, R1, R2&#10;..."
+                        class="program-textarea"
+                    ></textarea>
+                    <div class="button-group">
+                        <button id="generate-btn" class="btn primary">Generate Trace</button>
+                        <button id="clear-btn" class="btn secondary">Clear</button>
+                    </div>
+                </div>
+
+                <!-- Right: Highlight + Trace -->
+                <div>
+                    <div id="colored-program" class="colored-display" style="display: none;">
+                        <!-- Colored program will be displayed here -->
+                    </div>
+                    <div id="trace-section" style="display: none;">
+                        <h4 class="trace-title">Generated Trace</h4>
+                        <div id="colored-trace" class="colored-display">
+                            <!-- Colored trace will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simulation Controls -->
+        <div class="box">
+            <div class="predictor-controls">
+                <label class="predictor-label">
+                    <input type="checkbox" id="predictor-type" class="predictor-checkbox">
+                    <span id="predictor-text" class="predictor-text">One-Bit Predictor</span>
+                </label>
+            </div>
+
+            <div class="sequence-input-group">
+                <label class="sequence-label">Branch Sequence:</label>
+                <input 
+                    id="sequence-input" 
+                    type="text" 
+                    placeholder="e.g. B0:T,B1:N"
+                    class="sequence-input"
+                >
+            </div>
+
+            <div class="button-group">
+                <button id="run-btn" class="btn primary">Run Simulation</button>
+                <button id="reset-btn" class="btn secondary">Reset</button>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results-section" class="box" style="display: none;">
+            <h3 class="section-title">Results</h3>
+            <div class="table-container">
+                <table id="results-table" class="results-table">
+                    <thead>
+                        <tr class="table-header">
+                            <th>Step</th>
+                            <th>Branch</th>
+                            <th>Actual</th>
+                            <th>Prediction</th>
+                            <th>Correct?</th>
+                            <th>State Before</th>
+                            <th>State After</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-tbody">
+                        <!-- Results will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="summary" class="summary" style="display: none;">
+                <!-- Summary will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/main.js"></script>
 </body>
 </html>

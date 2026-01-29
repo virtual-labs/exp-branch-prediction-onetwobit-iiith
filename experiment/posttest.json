@@ -2,38 +2,156 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What is the primary function of a branch predictor in a CPU pipeline?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "To increase the clock speed of the processor.",
+        "b": "To reduce the number of branch instructions in a program.",
+        "c": "To guess the outcome of a conditional branch instruction.",
+        "d": "To store the results of arithmetic operations."
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
+        "a": "Incorrect. Branch prediction does not directly increase clock speed.",
+        "b": "Incorrect. It doesn't alter the program's instructions.",
+        "c": "Correct. It predicts whether a branch will be taken or not to avoid pipeline stalls.",
+        "d": "Incorrect. That is the function of registers."      },
+      "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "How does a one-bit branch predictor make its prediction?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "It always predicts 'taken'.",
+        "b": "It uses the result of the last execution of the same branch.",
+        "c": "It analyzes the instruction that follows the branch.",
+        "d": "It uses a random number generator."
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. This is a static prediction strategy, not a one-bit dynamic predictor.",
+        "b": "Correct. It stores one bit of history for the branch.",
+        "c": "Incorrect. It does not look ahead at other instructions.",
+        "d": "Incorrect. The prediction is deterministic, not random."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What are the two states of a one-bit branch predictor?",
+      "answers": {
+        "a": "Start and End",
+        "b": "Taken and Not Taken",
+        "c": "Correct and Incorrect",
+        "d": "Read and Write"
+      },
+      "explanations": {
+        "a": "Incorrect. These are not states of a branch predictor.",
+        "b": "Correct. The single bit represents whether the last branch was taken or not taken.",
+        "c": "Incorrect. These are outcomes of a prediction, not the states themselves.",
+        "d": "Incorrect. These are memory operations."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the main limitation of a one-bit branch predictor, especially in a loop?",
+      "answers": {
+        "a": "It always mispredicts the first and last iterations.",
+        "b": "It is too complex to implement in hardware.",
+        "c": "It consumes too much power.",
+        "d": "It can only predict forward branches."
+      },
+      "explanations": {
+        "a": "Correct. It mispredicts on the first entry into the loop (if the last branch was not taken) and on the final exit from the loop.",
+        "b": "Incorrect. It is the simplest dynamic predictor to implement.",
+        "c": "Incorrect. Its power consumption is negligible.",
+        "d": "Incorrect. It can predict both forward and backward branches."
+      },
+      "correctAnswer": "a",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "How many bits does a two-bit saturating counter use for prediction?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "d": "4"
+      },
+      "explanations": {
+        "a": "Incorrect. That would be a one-bit predictor.",
+        "b": "Correct. It uses a two-bit counter to track the history of a branch.",
+        "c": "Incorrect. While possible, it's not the standard two-bit predictor.",
+        "d": "Incorrect. This would be a four-bit predictor."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In a two-bit predictor, which state transition occurs when a branch is in the 'Strongly Taken' (11) state and the branch is not taken?",
+      "answers": {
+        "a": "It remains in the 'Strongly Taken' (11) state.",
+        "b": "It moves to the 'Weakly Taken' (10) state.",
+        "c": "It moves to the 'Weakly Not Taken' (01) state.",
+        "d": "It moves to the 'Strongly Not Taken' (00) state."
+      },
+      "explanations": {
+        "a": "Incorrect. The state must change to reflect the 'not taken' outcome.",
+        "b": "Correct. A single 'not taken' outcome moves the state down by one.",
+        "c": "Incorrect. This would require two consecutive 'not taken' outcomes.",
+        "d": "Incorrect. This would require two consecutive 'not taken' outcomes."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Why is a two-bit predictor generally more accurate than a one-bit predictor?",
+      "answers": {
+        "a": "It can predict the direction of the branch.",
+        "b": "It requires two consecutive mispredictions to change its prediction.",
+        "c": "It is faster at making predictions.",
+        "d": "It uses a more complex algorithm."
+      },
+      "explanations": {
+        "a": "Incorrect. Both predictors predict the direction (taken or not taken).",
+        "b": "Correct. This 'hysteresis' prevents it from changing its prediction based on a single, anomalous outcome.",
+        "c": "Incorrect. The prediction speed is comparable.",
+        "d": "Incorrect. While true, this is the reason for its higher accuracy."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Consider a two-bit predictor in the 'Weakly Not Taken' (01) state. What happens if the next two branches are taken?",
+      "answers": {
+        "a": "It moves to 'Strongly Taken' (11).",
+        "b": "It moves to 'Weakly Taken' (10).",
+        "c": "It remains in 'Weakly Not Taken' (01).",
+        "d": "It moves to 'Strongly Not Taken' (00)."
+      },
+      "explanations": {
+        "a": "Correct. The first 'taken' moves it to 'Weakly Taken' (10), and the second 'taken' moves it to 'Strongly Taken' (11).",
+        "b": "Incorrect. This is the state after the first 'taken' branch.",
+        "c": "Incorrect. The state must change.",
+        "d": "Incorrect. This would happen if the branches were not taken."
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Which of the following sequences of branch outcomes would result in the highest accuracy for a one-bit predictor, starting in the 'Not Taken' state?",
+      "answers": {
+        "a": "T, N, T, N, T, N",
+        "b": "T, T, T, T, T, T",
+        "c": "N, N, N, N, N, N",
+        "d": "T, T, N, N, T, T"
+      },
+      "explanations": {
+        "a": "Incorrect. This would result in many mispredictions.",
+        "b": "Correct. After the first misprediction, it will correctly predict the rest.",
+        "c": "Correct. It will correctly predict all branches.",
+        "d": "Incorrect. This would also result in mispredictions."
       },
       "correctAnswer": "c",
-      "difficulty": "beginner"
+      "difficulty": "advanced"
     }
   ]
 }
