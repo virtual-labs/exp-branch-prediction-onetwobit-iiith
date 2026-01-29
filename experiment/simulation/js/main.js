@@ -72,6 +72,41 @@ NOP`,
     }
 ];
 
+// Supported instructions
+const SUPPORTED_INSTRUCTIONS = ['MOV', 'ADD', 'SUB', 'AND', 'BEQ', 'BNE', 'NOP'];
+
+// Validate instructions before execution
+function validateInstructions(code) {
+    const lines = code
+        .split(/\n+/)
+        .map(l => l.trim())
+        .filter(Boolean);
+
+    const unsupportedInstructions = [];
+
+    lines.forEach((line, lineNum) => {
+        // Remove label prefix if present
+        let instr = line;
+        const labelMatch = line.match(/^(\w+):/);
+        if (labelMatch) {
+            const rest = line.replace(/^(\w+):/, '').trim();
+            if (!rest) return; // Just a label, skip
+            instr = rest;
+        }
+
+        const op = instr.split(/[ ,]+/)[0].toUpperCase();
+        if (op && !SUPPORTED_INSTRUCTIONS.includes(op)) {
+            unsupportedInstructions.push({
+                line: lineNum + 1,
+                instruction: op,
+                fullLine: line
+            });
+        }
+    });
+
+    return unsupportedInstructions;
+}
+
 // Branch trace generation function
 function generateBranchTrace(code) {
     const lines = code
@@ -281,12 +316,22 @@ function runSimulation(predictorType, input) {
 function handleGenerate() {
     const programInput = document.getElementById('program-input');
     program = programInput.value;
-    
+
     if (!program.trim()) {
         alert('Please enter some assembly code first.');
         return;
     }
-    
+
+    // Validate instructions before execution
+    const unsupported = validateInstructions(program);
+    if (unsupported.length > 0) {
+        const errorList = unsupported
+            .map(u => `Line ${u.line}: "${u.instruction}" - "${u.fullLine}"`)
+            .join('\n');
+        alert(`Unsupported instruction(s) found:\n\n${errorList}\n\nSupported instructions: ${SUPPORTED_INSTRUCTIONS.join(', ')}`);
+        return;
+    }
+
     const { trace, coloredProgramHTML, coloredTraceHTML } = generateBranchTrace(program);
     coloredProgram = coloredProgramHTML;
     sequence = trace;
