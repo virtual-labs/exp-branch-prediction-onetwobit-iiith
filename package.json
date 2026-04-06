@@ -19,5 +19,8 @@
   "homepage": "https://github.com/virtual-labs/exp-branch-prediction-onetwobit-iiith#readme",
   "dependencies": {
     "@virtual-labs/buildexp": "^2.1.0"
+  },
+  "overrides": {
+    "handlebars": "^4.7.9"
   }
 }
