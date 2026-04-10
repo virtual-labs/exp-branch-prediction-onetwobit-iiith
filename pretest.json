@@ -1,0 +1,157 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "What is the purpose of a branch predictor?",
+      "answers": {
+        "a": "To execute branches faster",
+        "b": "To predict the outcome of a branch",
+        "c": "To store branch instructions",
+        "d": "To count the number of branches"
+      },
+      "explanations": {
+        "a": "Incorrect. While the goal is to improve performance, the specific function is prediction.",
+        "b": "Correct. A branch predictor guesses the outcome of a conditional branch to keep the pipeline full.",
+        "c": "Incorrect. Branch instructions are stored in memory, not by the predictor.",
+        "d": "Incorrect. A branch predictor does not count branches."      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What does a one-bit predictor use to make a prediction?",
+      "answers": {
+        "a": "A two-bit counter",
+        "b": "The previous outcome of the branch",
+        "c": "A random guess",
+        "d": "The type of branch instruction"
+      },
+      "explanations": {
+        "a": "Incorrect. That's a two-bit predictor.",
+        "b": "Correct. A one-bit predictor uses a single bit to store the last outcome.",
+        "c": "Incorrect. It's a deterministic prediction based on history.",
+        "d": "Incorrect. The type of instruction doesn't determine the prediction."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "How many states does a one-bit predictor have?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "d": "4"
+      },
+      "explanations": {
+        "a": "Incorrect. It needs to represent Taken and Not Taken.",
+        "b": "Correct. The two states are Taken and Not Taken.",
+        "c": "Incorrect. There are only two possible outcomes for a branch.",
+        "d": "Incorrect. This is the number of states for a two-bit predictor."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is a primary disadvantage of a one-bit branch predictor?",
+      "answers": {
+        "a": "Its hardware implementation is more complex than a two-bit predictor.",
+        "b": "It performs poorly on branches that are strongly biased (i.e., almost always taken).",
+        "c": "It mispredicts twice on each execution of a simple loop.",
+        "d": "It introduces significant latency into the processor's instruction pipeline."
+      },
+      "explanations": {
+        "a": "Incorrect. A one-bit predictor is the simplest form of dynamic branch predictor and is less complex than a two-bit predictor.",
+        "b": "Incorrect. This is a strength, not a weakness. For a strongly biased branch, it will predict correctly after the very first instance.",
+        "c": "Correct. Because it flips its prediction after a single incorrect outcome, it mispredicts the first time a loop is entered (a taken branch) and the first time it is exited (a not-taken branch), resulting in two mispredictions for every complete loop execution.",
+        "d": "Incorrect. Due to its simplicity, a one-bit predictor is extremely fast and has very low latency."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "How many states does a two-bit predictor have?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "d": "4"
+      },
+      "explanations": {
+        "a": "Incorrect. It uses two bits.",
+        "b": "Incorrect. This is for a one-bit predictor.",
+        "c": "Incorrect. The number of states is 2^n where n is the number of bits.",
+        "d": "Correct. The four states are Strongly Not Taken, Weakly Not Taken, Weakly Taken, and Strongly Taken."
+      },
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "In a two-bit predictor, what does the state '11' represent?",
+      "answers": {
+        "a": "Strongly not taken",
+        "b": "Weakly not taken",
+        "c": "Weakly taken",
+        "d": "Strongly taken"
+      },
+      "explanations": {
+        "a": "Incorrect. This is state '00'.",
+        "b": "Incorrect. This is state '01'.",
+        "c": "Incorrect. This is state '10'.",
+        "d": "Correct. '11' represents the highest confidence that the branch will be taken."
+      },
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "How many consecutive incorrect predictions does it take to change the prediction of a two-bit predictor from 'Strongly Taken' to 'Not Taken'?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "d": "4"
+      },
+      "explanations": {
+        "a": "Incorrect. One incorrect prediction moves it to 'Weakly Taken'.",
+        "b": "Correct. It takes two consecutive 'Not Taken' outcomes to move from 'Strongly Taken' (11) to 'Weakly Not Taken' (01), thus changing the prediction.",
+        "c": "Incorrect. That's too many.",
+        "d": "Incorrect. That's too many."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is the main advantage of using a two-bit saturating counter for branch prediction over a one-bit scheme?",
+      "answers": {
+        "a": "It reduces interference (aliasing) between different branches mapping to the same counter.",
+        "b": "It can predict a branch's target address in addition to its direction.",
+        "c": "It provides hysteresis, preventing a single different outcome from flipping the prediction.",
+        "d": "It converges on the correct prediction for a strongly biased branch more quickly."
+      },
+      "explanations": {
+        "a": "Incorrect. Aliasing is related to the size of the predictor table and the hashing function used, not the number of bits in the counter itself.",
+        "b": "Incorrect. Directional predictors like one-bit and two-bit counters only predict if a branch is taken or not-taken. The Branch Target Buffer (BTB) is responsible for predicting the target address.",
+        "c": "Correct. A two-bit counter must be wrong twice in a row to swing from a 'strongly taken' to a 'weakly not-taken' state. This hysteresis makes it resilient to the single not-taken branch at the end of a typical loop, improving accuracy.",
+        "d": "Incorrect. A one-bit predictor will be correct after just one execution of a biased branch, while a two-bit counter needs at least two executions to move to a 'strongly' biased state. Therefore, it converges more slowly."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "Which of the following is NOT a state in a two-bit predictor?",
+      "answers": {
+        "a": "00",
+        "b": "01",
+        "c": "10",
+        "d": "12"
+      },
+      "explanations": {
+        "a": "Incorrect. '00' is 'Strongly Not Taken'.",
+        "b": "Incorrect. '01' is 'Weakly Not Taken'.",
+        "c": "Incorrect. '10' is 'Weakly Taken'.",
+        "d": "Correct. Binary states can only be 0 or 1, so '12' is not a valid state."
+      },
+      "correctAnswer": "d",
+      "difficulty": "advanced"
+    }
+  ]
+}
